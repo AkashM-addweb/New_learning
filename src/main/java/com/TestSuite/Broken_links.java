@@ -33,7 +33,7 @@ public class Broken_links extends Baseinit {
         while (iterator.hasNext()){
             url=iterator.next().getAttribute("href");
             System.out.println(url);
-
+//
             if(url==null || url.isEmpty()){
                 System.out.println("URL is empty or NULL");
             }

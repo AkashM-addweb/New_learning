@@ -16,7 +16,7 @@ public class Registration extends Baseinit {
 
         driver.findElement(By.xpath(objectStorage.getProperty("signUP_xpath"))).click();
         Thread.sleep(3000);
-
+//
         driver.findElement(By.xpath(objectStorage.getProperty("tryForfree_xpath"))).click();
         Thread.sleep(3000);
 
