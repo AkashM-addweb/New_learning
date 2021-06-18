@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.time.Duration;
 
 public class ActionClass extends Baseinit {
 
@@ -67,7 +68,9 @@ public class ActionClass extends Baseinit {
 //        WebElement drop=driver.findElement(By.className("ui-widget-content ui-draggable ui-draggable-handle"));
         WebElement drag=driver.findElement(By.xpath("//*[@id=\"draggable\"]"));
         WebElement drop=driver.findElement(By.xpath("//*[@id=\"droppable\"]"));
-        actions.clickAndHold(drag).moveToElement(drop).release().build().perform();
+//        actions.clickAndHold(drag).pause(Duration.ofSeconds(2)).moveToElement(drop).release().build().perform();
+//        actions.moveToElement(drag).clickAndHold(drag).moveToElement(drop).release().build().perform();
+        actions.moveToElement(drag).clickAndHold(drag).moveToElement(drop).release().build().perform();
 
         driver.get("https://jqueryui.com/droppable/");
         Thread.sleep(3000);
@@ -79,7 +82,21 @@ public class ActionClass extends Baseinit {
     }
 
     @Test
-    public void checkSlider(){
+    public void clickandHolds() throws IOException, InterruptedException {
+        startUP();
+        //Double click
+
+        Actions actions=new Actions(driver);
+        driver.get("https://dhtmlx.com/docs/products/dhtmlxTree/");
+
+        Thread.sleep(7000);
+        actions.moveToElement(driver.findElement(By.xpath("/html/body/section/div[1]/div[1]/div")));
+        Thread.sleep(7000);
+        WebElement src= driver.findElement(By.xpath("//span[text()='Lawrence Block']"));
+        WebElement target= driver.findElement(By.xpath("//li[text()='Ian Rankin']"));
+
+        actions.clickAndHold(src).pause(Duration.ofSeconds(2)).moveToElement(target).release().build().perform();
+
 
     }
 
