@@ -96,16 +96,12 @@ public class ActionClass extends Baseinit {
         WebElement target= driver.findElement(By.xpath("//li[text()='Ian Rankin']"));
 
         actions.clickAndHold(src).pause(Duration.ofSeconds(2)).moveToElement(target).release().build().perform();
-
-
     }
 
     @Test
     public void dragANDdropBy() throws IOException, InterruptedException {
 
         startUP();
-
-//        driver.get("https://demoqa.com/slider");
         driver.get("https://jqueryui.com/slider/");
 
         WebElement frame = driver.findElement(By.xpath("//*[@id=\"content\"]/iframe"));
@@ -114,11 +110,10 @@ public class ActionClass extends Baseinit {
         WebElement element= driver.findElement(By.xpath("//*[@id=\"slider\"]/span"));
         Actions actions= new Actions(driver);
         Thread.sleep(4000);
-//        actions.moveToElement(element);
+//      actions.moveToElement(element);
         Thread.sleep(4000);
         actions.dragAndDropBy(element, 100, 200).build().perform();
-//        actions.clickAndHold(element).moveByOffset(22,75).release().perform();
-//        String sliderCursor= driver.findElement(By.className("ui-slider-handle ui-corner-all ui-state-default")).getAttribute("tabindex");
+//      actions.clickAndHold(element).moveByOffset(22,75).release().perform();
 
     }
 
