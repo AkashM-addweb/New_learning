@@ -3,12 +3,11 @@ package com.herokuApp;
 import com.Basepackage.Baseinit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -96,12 +95,12 @@ public class herokuApp extends Baseinit {
         startUP();
 
         driver.get("https://the-internet.herokuapp.com/context_menu");
-        Actions actions= new Actions(driver);
-        WebElement hot_Spot= driver.findElement(By.id("hot-spot"));
+        Actions actions = new Actions(driver);
+        WebElement hot_Spot = driver.findElement(By.id("hot-spot"));
         actions.moveToElement(hot_Spot).contextClick().build().perform();
         Thread.sleep(3000);
         driver.switchTo().alert().accept();
-
+//        actions.moveByOffset().
 
     }
 
@@ -110,21 +109,53 @@ public class herokuApp extends Baseinit {
         startUP();
         driver.get("https://the-internet.herokuapp.com/entry_ad");
 
-        WebElement link= driver.findElement(By.id("restart-ad"));
+        WebElement link = driver.findElement(By.id("restart-ad"));
         link.click();
 
         Thread.sleep(3000);
 
-        WebElement modal= driver.findElement(By.className("modal"));
+        WebElement modal = driver.findElement(By.className("modal"));
         Assert.assertTrue(modal.isDisplayed());
 
-        WebElement closeButton= driver.findElement(By.xpath("//*[@id=\"modal\"]/div[2]/div[3]/p"));
+        WebElement closeButton = driver.findElement(By.xpath("//*[@id=\"modal\"]/div[2]/div[3]/p"));
         closeButton.click();
 
         Assert.assertTrue(modal.isDisplayed());
 
 
-
     }
 
+    @Test
+    public void checkDownloadedFile() throws InterruptedException, IOException {
+
+        startUP();
+
+        driver.get("https://the-internet.herokuapp.com/download");
+        Thread.sleep(3000);
+
+        String filename = "Passport.jpg";
+
+        driver.findElement(By.linkText("Passport.jpg")).click();
+        Thread.sleep(3000);
+
+        File dir = new File("/home/addweb/Downloads");
+        File[] dirContents = dir.listFiles();
+        System.out.println(dirContents);
+
+        System.out.println("Length of the contents: "+dirContents.length);
+//
+//        for (int j=0; j< dirContents.length; j++){
+//            System.out.println(dirContents[j].getName());
+//        }
+
+        Thread.sleep(5000);
+
+        for (int i = 0; i <dirContents.length; i++) {
+
+            if (dirContents[i].getName().equalsIgnoreCase(filename)) {
+                System.out.println("File found");
+                break;
+            }
+        }
+    }
 }
