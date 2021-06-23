@@ -4,6 +4,7 @@ import com.Basepackage.Baseinit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -59,36 +60,70 @@ public class herokuApp extends Baseinit {
 
     }
 
-
     @Test
     public void dynamic_controls() throws IOException, InterruptedException {
-
         startUP();
-
         //Add or Remove
 
         driver.get("https://the-internet.herokuapp.com/dynamic_controls");
-        WebElement removeButton= driver.findElement(By.xpath("//*[@id=\"checkbox-example\"]/button"));
-        WebElement addButton= driver.findElement(By.xpath("//*[@id=\"checkbox-example\"]/button"));
+        WebElement removeButton = driver.findElement(By.xpath("//*[@id=\"checkbox-example\"]/button"));
+        WebElement addButton = driver.findElement(By.xpath("//*[@id=\"checkbox-example\"]/button"));
 
         removeButton.click();
         Thread.sleep(3000);
         addButton.click();
         Thread.sleep(3000);
-        WebElement checkbox= driver.findElement(By.id("checkbox"));
+        WebElement checkbox = driver.findElement(By.id("checkbox"));
 
         Assert.assertTrue(checkbox.isDisplayed());
 //        Assert.assertTrue(textElement.isDisplayed());
 
         //Enable and Disable
 
-        WebElement inputText= driver.findElement(By.xpath("//*[@id=\"input-example\"]/input"));
-        WebElement enableButton= driver.findElement(By.xpath("//*[@id=\"input-example\"]/button"));
+        WebElement inputText = driver.findElement(By.xpath("//*[@id=\"input-example\"]/input"));
+        WebElement enableButton = driver.findElement(By.xpath("//*[@id=\"input-example\"]/button"));
         Assert.assertTrue(!inputText.isEnabled());
         Thread.sleep(3000);
         enableButton.click();
         Thread.sleep(3000);
         Assert.assertTrue(inputText.isEnabled());
+
+    }
+
+    @Test
+    public void contextMenu() throws InterruptedException, IOException {
+
+        startUP();
+
+        driver.get("https://the-internet.herokuapp.com/context_menu");
+        Actions actions= new Actions(driver);
+        WebElement hot_Spot= driver.findElement(By.id("hot-spot"));
+        actions.moveToElement(hot_Spot).contextClick().build().perform();
+        Thread.sleep(3000);
+        driver.switchTo().alert().accept();
+
+
+    }
+
+    @Test
+    public void entry_Ad() throws InterruptedException, IOException {
+        startUP();
+        driver.get("https://the-internet.herokuapp.com/entry_ad");
+
+        WebElement link= driver.findElement(By.id("restart-ad"));
+        link.click();
+
+        Thread.sleep(3000);
+
+        WebElement modal= driver.findElement(By.className("modal"));
+        Assert.assertTrue(modal.isDisplayed());
+
+        WebElement closeButton= driver.findElement(By.xpath("//*[@id=\"modal\"]/div[2]/div[3]/p"));
+        closeButton.click();
+
+        Assert.assertTrue(modal.isDisplayed());
+
+
 
     }
 
