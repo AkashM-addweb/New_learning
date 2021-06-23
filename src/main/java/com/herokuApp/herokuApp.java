@@ -2,6 +2,7 @@ package com.herokuApp;
 
 import com.Basepackage.Baseinit;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
@@ -157,5 +158,47 @@ public class herokuApp extends Baseinit {
                 break;
             }
         }
+    }
+
+    @Test
+    public void uploadFile() throws IOException, InterruptedException {
+        startUP();
+        driver.get("https://the-internet.herokuapp.com/upload");
+        WebElement fileUpload= driver.findElement(By.id("file-upload"));
+        fileUpload.sendKeys("/home/addweb/Downloads/Passport.jpg");
+        Thread.sleep(3000);
+        driver.findElement(By.id("file-submit")).click();
+
+    }
+
+    @Test
+    public void floatingMenu() throws IOException, InterruptedException {
+        startUP();
+        driver.get("https://the-internet.herokuapp.com/floating_menu");
+        Thread.sleep(3000);
+        WebElement menu= driver.findElement(By.id("menu"));
+        Assert.assertTrue(menu.isDisplayed());
+
+        JavascriptExecutor jse= (JavascriptExecutor)driver;
+        jse.executeScript("window.scrollBy(0,500)","");
+        Assert.assertTrue(menu.isDisplayed());
+
+        Thread.sleep(3000);
+        jse.executeScript("window.scrollBy(0,500)","");
+        Assert.assertTrue(menu.isDisplayed());
+
+    }
+
+    @Test
+    public void handleFrames() throws IOException, InterruptedException {
+        startUP();
+        driver.get("https://the-internet.herokuapp.com/frames");
+
+        //Nested iFrames
+        driver.findElement(By.linkText("Nested Frames")).click();
+        Thread.sleep(5000);
+//        driver.switchTo().frame("frame-middle");
+        driver.switchTo().frame(driver.findElement(By.name("frame-middle")));
+
     }
 }
