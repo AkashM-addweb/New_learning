@@ -5,13 +5,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 public class herokuApp extends Baseinit {
 
@@ -76,10 +83,8 @@ public class herokuApp extends Baseinit {
         WebElement checkbox = driver.findElement(By.id("checkbox"));
 
         Assert.assertTrue(checkbox.isDisplayed());
-//        Assert.assertTrue(textElement.isDisplayed());
 
         //Enable and Disable
-
         WebElement inputText = driver.findElement(By.xpath("//*[@id=\"input-example\"]/input"));
         WebElement enableButton = driver.findElement(By.xpath("//*[@id=\"input-example\"]/button"));
         Assert.assertTrue(!inputText.isEnabled());
@@ -87,7 +92,6 @@ public class herokuApp extends Baseinit {
         enableButton.click();
         Thread.sleep(3000);
         Assert.assertTrue(inputText.isEnabled());
-
     }
 
     @Test
@@ -122,8 +126,6 @@ public class herokuApp extends Baseinit {
         closeButton.click();
 
         Assert.assertTrue(modal.isDisplayed());
-
-
     }
 
     @Test
@@ -192,13 +194,131 @@ public class herokuApp extends Baseinit {
     @Test
     public void handleFrames() throws IOException, InterruptedException {
         startUP();
-        driver.get("https://the-internet.herokuapp.com/frames");
+        driver.get("https://www.guru99.com/handling-iframes-selenium.html");
 
-        //Nested iFrames
-        driver.findElement(By.linkText("Nested Frames")).click();
+        //Nested Frames
+//        driver.findElement(By.linkText("Nested Frames")).click();
         Thread.sleep(5000);
-//        driver.switchTo().frame("frame-middle");
-        driver.switchTo().frame(driver.findElement(By.name("frame-middle")));
+        driver.switchTo().frame("google_ads_iframe_/24132379/guru99.com_300x250_2_0");
+
+        //iFrame
+        driver.get("https://the-internet.herokuapp.com/iframe");
+        Thread.sleep(3000);
+        driver.switchTo().frame("mce_0_ifr");
+        WebElement editor=driver.findElement(By.id("tinymce"));
+        editor.sendKeys("google_ads_iframe_/24132379/guru99.com_300x250_2_0");
+        Thread.sleep(2000);
+        String textEditor=editor.getText();
+        System.out.println(textEditor);
 
     }
+
+//    @Test
+//        public void test_Selenium4_Geolocation() throws InterruptedException {
+//            Map< String,Object> coordinates =
+//                    new HashMap< String,Object>();
+//
+//            /* Create a hashmap for latitude, longitude, and accuracy as needed by Google Maps */
+//            coordinates.put("latitude", 42.1408845);
+//            coordinates.put("longitude", -72.5033907);
+//            coordinates.put("accuracy", 100);
+//
+//            /* Command to emulate Geolocation */
+//            driver.exe("Emulation.setGeolocationOverride", coordinates);
+//            driver.navigate().to(URL);
+//            driver.manage().window().maximize();
+//
+//            /* driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); */
+//            /* Not a good programming practice, added for demonstration */
+//            Thread.sleep(5000);
+//
+//            WebElement location_icon = driver.findElement(By.cssSelector(".icon-geolocate"));
+//            Thread.sleep(2000);
+//            location_icon.click();
+//
+//            Thread.sleep(6000);
+//            System.out.println("Geolocation testing with Selenium is complete");
+//        }
+
+
+    @Test
+    public void hovers() throws IOException, InterruptedException {
+        startUP();
+        driver.get("https://the-internet.herokuapp.com/hovers");
+        Thread.sleep(3000);
+        Actions actions= new Actions(driver);
+        //Hover on 1
+        actions.moveToElement(driver.findElement(By.xpath("//*[@id=\"content\"]/div/div[1]/img"))).build().perform();
+
+        WebElement profileText= driver.findElement(By.xpath("//*[@id=\"content\"]/div/div[1]/div/a"));
+        Boolean text= profileText.isDisplayed();
+        Assert.assertTrue(text);
+        Thread.sleep(4000);
+        profileText.click();
+
+//        String text= driver.findElement(By.xpath("//*[@id=\"content\"]/div/div[1]/img")).getText();
+
+    }
+
+    @Test
+    public void infiniteScroll() throws IOException, InterruptedException {
+        startUP();
+        driver.get("https://the-internet.herokuapp.com/infinite_scroll");
+        Thread.sleep(3000);
+        Boolean footer= driver.findElement(By.id("page-footer")).isDisplayed();
+
+        while(footer){
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollTo(0,document.body.scrollHeight);");
+    }
+ }
+
+
+    @Test
+    public void jQueryUImenu() throws IOException, InterruptedException {
+        startUP();
+        driver.get("https://the-internet.herokuapp.com/jqueryui/menu");
+        Thread.sleep(5000);
+        Actions actions= new Actions(driver);
+        WebElement disableID= driver.findElement(By.id("ui-id-1"));
+        WebElement enabled = driver.findElement(By.xpath("//*[@id='ui-id-3']/a"));
+        WebElement downLoad = driver.findElement(By.xpath("//*[@id=\"ui-id-4\"]/span"));
+        WebElement CSV = driver.findElement(By.xpath("//*[@id=\"ui-id-6\"]/a"));
+
+        actions.moveToElement(enabled).build().perform();
+        Thread.sleep(2000);
+        actions.moveToElement(downLoad).build().perform();
+        Thread.sleep(2000);
+        actions.moveToElement(CSV).click().build().perform();
+
+    }
+
+    @Test
+    public void handleJavascriptError() throws IOException, InterruptedException {
+
+        startUP();
+//        LogEntries entries = driver.manage().logs().get(LogType.BROWSER);
+//        entries.filter(Level.SEVERE);
+
+        driver.get("https://the-internet.herokuapp.com/javascript_error");
+        Thread.sleep(3000);
+
+        LogEntries logEntries = driver.manage().logs().get("browser");
+        Thread.sleep(3000);
+
+        for (LogEntry entry : logEntries) {
+            System.out.println(new Date(entry.getTimestamp()) + " " + entry.getLevel() + " " + entry.getMessage());
+//            String errorLogType= entry.getLevel().toString();
+            String errorLogType= entry.getLevel().toString();
+            String errorLog= entry.getMessage().toString();
+            if(errorLog.contains("404")){
+                System.out.println("Error LogType: "+ errorLogType+" Error Log message: "+errorLog);
+            }
+        }
+
+    }
+
 }
+
+
+
