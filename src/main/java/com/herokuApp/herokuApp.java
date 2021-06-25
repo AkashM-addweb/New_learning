@@ -1,7 +1,9 @@
 package com.herokuApp;
 
 import com.Basepackage.Baseinit;
+import org.apache.lucene.search.spell.SpellChecker;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -11,6 +13,7 @@ import org.openqa.selenium.logging.LogType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import javax.security.auth.login.Configuration;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -317,6 +320,24 @@ public class herokuApp extends Baseinit {
         }
 
     }
+
+    @Test
+    public void spellChecker() throws IOException, InterruptedException {
+        startUP();
+        driver.get("https://artoftesting.com/maximize-minimize-a-browser-in-selenium-webdriver-java/amp");
+
+        Thread.sleep(3000);
+        String texts= driver.findElement(By.tagName("body")).getText();
+        System.out.println(texts);
+
+//        SpellChecker checker= new SpellChecker();
+        Dimension dimension = new Dimension(300, 500);
+        driver.manage().window().setSize(dimension);
+
+
+    }
+
+
 
 }
 
