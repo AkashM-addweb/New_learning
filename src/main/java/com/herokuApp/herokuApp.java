@@ -338,6 +338,14 @@ public class herokuApp extends Baseinit {
     }
 
 
+    @Test
+    public void nestedDOM() throws IOException, InterruptedException {
+        startUP();
+        driver.get("https://the-internet.herokuapp.com/large");
+        Thread.sleep(3000);
+      WebElement root=  driver.findElement(By.xpath("//*[@id=\"sibling-9.1\"]"));
+
+    }
 
 }
 
