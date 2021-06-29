@@ -129,6 +129,7 @@ public class herokuApp extends Baseinit {
         closeButton.click();
 
         Assert.assertTrue(modal.isDisplayed());
+
     }
 
     @Test
@@ -346,6 +347,7 @@ public class herokuApp extends Baseinit {
       WebElement root=  driver.findElement(By.xpath("//*[@id=\"sibling-9.1\"]"));
 
     }
+
 
 }
 

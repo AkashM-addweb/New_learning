@@ -38,7 +38,7 @@ public class ActionClass extends Baseinit {
 
         //Opening the link in new tab
         actions.moveToElement(driver.findElement(By.xpath("//*[@id=\"app\"]/header/a/img"))).keyDown(Keys.CONTROL)
-        .click().keyDown(Keys.CONTROL).build().perform();
+        .click().keyUp(Keys.CONTROL).build().perform();
 
         Thread.sleep(3000);
         driver.quit();
