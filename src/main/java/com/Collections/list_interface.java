@@ -24,15 +24,23 @@ public class list_interface {
         ArrayList<Integer> numbers = new ArrayList<Integer>();
 
         numbers.add(1);
+//        numbers.addAll();
         numbers.add(2);
         numbers.add(3);
         numbers.add(4);
         numbers.add(5);
         numbers.remove(3);
         System.out.println(numbers.get(2));
-
         System.out.println(numbers);
 
+        ArrayList<Integer> integers3= new ArrayList<Integer>();
+        integers3.addAll(numbers);
+        System.out.println("Add All() Functionality:" + integers3);
+        integers3.addAll(3,numbers);
+        System.out.println(integers3);
+        System.out.println( integers3.addAll(3,numbers));
+
+        System.out.println("<-=--=====------------------------------>-");
         ArrayList<Integer> numbers2 = new ArrayList<Integer>();
         for(int i=30; i<50 ; i++){
             numbers2.add(i);
@@ -56,4 +64,16 @@ public class list_interface {
         System.out.println(listStrings);
 
     }
-}
+
+    @Test
+    public void arrayListPrograms(){
+
+        ArrayList<Integer> listElements= new ArrayList<Integer>();
+        Boolean checkList= listElements.isEmpty();
+        System.out.println(checkList);
+
+        listElements.ensureCapacity(5);
+
+
+    }
+    }

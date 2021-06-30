@@ -23,13 +23,16 @@ public class hashMap {
         hashings.put("Second", 2);
         hashings.put("Third", 3);
         hashings.put("Fourth", 4);
+
+        //The below code will update the value as their can only be 1 unique key and using the same key again will update the value of it
+        hashings.put("Fourth", 5);
         System.out.println(hashings);
 
         hashings.get(3);
         System.out.println(hashings.get("third"));
 
         System.out.print("Size: "); System.out.println(hashings.size());
-        System.out.print("Entry size: ");System.out.println(hashings.entrySet());
+        System.out.print("Entry set: ");System.out.println(hashings.entrySet());
         System.out.print("Values: "); System.out.println(hashings.values());
         System.out.print("Contains key: ");System.out.println(hashings.containsKey("Third"));
         System.out.print("Is Empty: "); System.out.println(hashings.isEmpty());
@@ -44,6 +47,7 @@ public class hashMap {
         System.out.print("Values: "); System.out.println(hashings.values());
         hashings.clear();
         System.out.print("Values: "); System.out.println(hashings.values());
+        System.out.print("Entry set: ");System.out.println(hashings.entrySet());
 
 
     }
