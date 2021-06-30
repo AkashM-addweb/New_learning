@@ -75,9 +75,7 @@ public class hashMap {
 //            System.out.println("Key:"+ e.getKey() +" and Value: " + e.getValue());
 
         for(Map.Entry<Integer, String> d: hashLoops.entrySet()){
-
             System.out.println(d.getKey() + d.getValue());
-
         }
     }
 }
