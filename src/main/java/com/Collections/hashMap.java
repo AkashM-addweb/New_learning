@@ -3,6 +3,7 @@ package com.Collections;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class hashMap {
 
@@ -51,5 +52,32 @@ public class hashMap {
 
 
     }
+    
+    @Test
+    public void hashLoops(){
+        
+        HashMap<Integer, String> hashLoops= new HashMap<Integer, String>();
+        hashLoops.put(1, "A");
+        hashLoops.put(2, "B");
+        hashLoops.put(3, "C");
+        hashLoops.put(4, "D");
+        hashLoops.put(5, "E");
+        hashLoops.put(6, "F");
+        hashLoops.put(7, "G");
+        hashLoops.put(8, "H");
+        hashLoops.put(9, "I");
+        hashLoops.put(10, "J");
 
+        //foreach (//Declare Type and Variable)
+
+//        for (Map.Entry<Integer, String> e:hashLoops.entrySet()) {
+////            e.getKey()
+//            System.out.println("Key:"+ e.getKey() +" and Value: " + e.getValue());
+
+        for(Map.Entry<Integer, String> d: hashLoops.entrySet()){
+
+            System.out.println(d.getKey() + d.getValue());
+
+        }
+    }
 }

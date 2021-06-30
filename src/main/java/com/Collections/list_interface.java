@@ -74,6 +74,23 @@ public class list_interface {
 
         listElements.ensureCapacity(5);
 
+        listElements.add(0);
+        listElements.add(1);
+        listElements.add(2);
+        listElements.add(3);
+        listElements.add(4);
+        listElements.add(5);
+        listElements.add(6);
+        listElements.add(7);
+        listElements.add(8);
+        listElements.add(9);
+        listElements.add(10);
+        List<Integer> subList= listElements.subList(4,8);
+        System.out.println(subList);
+
+        int codes= listElements.hashCode();
+        listElements.ensureCapacity(15);
+        System.out.println(listElements);
 
     }
     }
