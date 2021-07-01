@@ -3,6 +3,7 @@ package com.Collections;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 public class hashMap {
@@ -24,6 +25,8 @@ public class hashMap {
         hashings.put("Second", 2);
         hashings.put("Third", 3);
         hashings.put("Fourth", 4);
+        hashings.put( null,5);
+        hashings.put( null,null);
 
         //The below code will update the value as their can only be 1 unique key and using the same key again will update the value of it
         hashings.put("Fourth", 5);
@@ -68,14 +71,17 @@ public class hashMap {
         hashLoops.put(9, "I");
         hashLoops.put(10, "J");
 
-        //foreach (//Declare Type and Variable)
-
+//        foreach (//Declare Type and Variable)
 //        for (Map.Entry<Integer, String> e:hashLoops.entrySet()) {
-////            e.getKey()
-//            System.out.println("Key:"+ e.getKey() +" and Value: " + e.getValue());
+//        e.getKey()
+//        System.out.println("Key:"+ e.getKey() +" and Value: " + e.getValue());
 
         for(Map.Entry<Integer, String> d: hashLoops.entrySet()){
             System.out.println(d.getKey() + d.getValue());
+
+
+            Hashtable<String,Integer> hashtable= new Hashtable<String, Integer>();
+            hashtable.put(null,null);
         }
     }
 }
