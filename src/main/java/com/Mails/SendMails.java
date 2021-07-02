@@ -15,20 +15,14 @@ public class SendMails extends Baseinit {
 
     @Test
     public void sendMails() throws IOException, AddressException {
-
-//        startUP();
-
         Properties properties = System.getProperties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
 //        properties.put("mail.smtp.host", "smtp.mailtrap.io");
         properties.put("mail.smtp.socketFactory.port", "465");
         properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.port", "465");
-
 
         Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
-
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication("akash.m.addweb@gmail.com", "addweb9519");
             }
@@ -40,10 +34,10 @@ public class SendMails extends Baseinit {
             message.setFrom(new InternetAddress("johnnyharpertesting@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse("ronak.t.addweb@gmail.com")
+                    InternetAddress.parse("johnnyharpertesting71@gmail.com")
             );
 
-            message.setSubject("Testing Gmail TLS");
+            message.setSubject("Testing Gmail Mail");
             message.setText("Dear User,"
                     + "\n\n This is a test email. Please do not reply");
 
